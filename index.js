@@ -11,25 +11,10 @@ const port= process.env.PORT
 // kết nối đến database
 database.connect();
 // nhúng model task công việc
-const Task = require("./model/tash.model.js")
+// router v1
+const routerApiV1 = require("./api/v1/router/index.router.js")
+routerApiV1(app)
 
-app.get("/tasks/detail/:id", async (req,res)=>{
-    const id = req.params.id;
-    const task = await Task.findOne({
-        _id: id,
-        deleted:false
-    })
-    
-  
-    const tasks = await Task.find({
-        deleted:false,
-    })
-
-
-  
-    res.json(task)
-    
-})
 
 app.listen(port,() => {
     console.log(`Lắng Nghe Cổng ${port} `)
